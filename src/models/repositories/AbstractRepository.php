@@ -12,11 +12,11 @@ class AbstractRepository
 
     public function getAll()
     {
-        return $this->orm->getAll();
+        return $this->orm->all();
     }
     public function getOne(string $id)
     {
-        return $this->orm->getOne($id);
+        return $this->orm->find($id);
     }
     public function store(array $body)
     {
@@ -25,5 +25,9 @@ class AbstractRepository
     public function update(array $body)
     {
         return $this->orm->update($body);
+    }
+    public function destroy(string $id)
+    {
+        return $this->orm->destroy($id);
     }
 }

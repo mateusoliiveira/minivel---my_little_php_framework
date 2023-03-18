@@ -11,7 +11,14 @@ class BrandsController
     {
         $this->model = new BrandsRepository();
     }
-
+    public function store($body)
+    {
+        return $this->model->store($body);
+    }
+    public function update($body)
+    {
+        return $this->model->update($body);
+    }
     public function index()
     {
         return $this->model->getAll();
@@ -19,6 +26,10 @@ class BrandsController
     public function show($id)
     {
         return $this->model->getOne($id);
+    }
+    public function destroy($id)
+    {
+        return $this->model->destroy($id);
     }
     protected function app()
     {

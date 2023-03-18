@@ -61,14 +61,40 @@ $router = new Router();
 
 
 // Define your routes here
+$router->add('/brands/:id', function ($params, $query_params) {
+    $controller = new BrandsController();
+    return JsonResponse::send([
+        'data' => $controller->destroy($params['id']),
+        'message' => 'ok'
+    ]);
+}, 'DELETE');
 $router->add('/brands', function ($params, $query_params) {
     header('Accept: application/json');
+    $json_str = json_decode(file_get_contents('php://input'));
+    $data = array(
+        'name' => $json_str->name,
+        'picture' => $json_str->picture,
+    );
     $controller = new BrandsController();
-    // return JsonResponse::send([
-    //     'data' => $controller->store(),
-    //     'message' => 'ok'
-    // ]);
+    return JsonResponse::send([
+        'data' => $controller->store($data),
+        'message' => 'ok'
+    ]);
 }, 'POST');
+$router->add('/brands', function ($params, $query_params) {
+    header('Accept: application/json');
+    $json_str = json_decode(file_get_contents('php://input'));
+    $data = array(
+        'id' => $json_str->id,
+        'name' => $json_str->name,
+        'picture' => $json_str->picture,
+    );
+    $controller = new BrandsController();
+    return JsonResponse::send([
+        'data' => $controller->update($data),
+        'message' => 'ok'
+    ]);
+}, 'PUT');
 $router->add('/brands', function ($params, $query_params) {
     $controller = new BrandsController();
     return JsonResponse::send([

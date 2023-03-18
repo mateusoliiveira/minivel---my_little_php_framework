@@ -1,14 +1,7 @@
 <?php
 
+require(__DIR__ . '/../utils/response.php');
 require(__DIR__ . '/../controllers/BrandsController.php');
-class JsonResponse
-{
-    public static function send(array $data)
-    {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-    }
-}
 
 class Router
 {
@@ -16,7 +9,6 @@ class Router
 
     public function add($pattern, $callback, $method = 'GET')
     {
-
         $route = array(
             'pattern' => $pattern,
             'callback' => $callback,
@@ -62,7 +54,8 @@ $router = new Router();
 
 // Define your routes here
 $router->add('/brands/:id', function ($params, $query_params) {
-    $controller = new BrandsController();
+    $repository = new BrandsRepository();
+    $controller = new BrandsController($repository);
     return JsonResponse::send([
         'data' => $controller->destroy($params['id']),
         'message' => 'ok'
@@ -75,7 +68,8 @@ $router->add('/brands', function ($params, $query_params) {
         'name' => $json_str->name,
         'picture' => $json_str->picture,
     );
-    $controller = new BrandsController();
+    $repository = new BrandsRepository();
+    $controller = new BrandsController($repository);
     return JsonResponse::send([
         'data' => $controller->store($data),
         'message' => 'ok'
@@ -89,21 +83,24 @@ $router->add('/brands', function ($params, $query_params) {
         'name' => $json_str->name,
         'picture' => $json_str->picture,
     );
-    $controller = new BrandsController();
+    $repository = new BrandsRepository();
+    $controller = new BrandsController($repository);
     return JsonResponse::send([
         'data' => $controller->update($data),
         'message' => 'ok'
     ]);
 }, 'PUT');
 $router->add('/brands', function ($params, $query_params) {
-    $controller = new BrandsController();
+    $repository = new BrandsRepository();
+    $controller = new BrandsController($repository);
     return JsonResponse::send([
         'data' => $controller->index(),
         'message' => 'ok'
     ]);
 });
 $router->add('/brands/:id', function ($params, $query_params) {
-    $controller = new BrandsController();
+    $repository = new BrandsRepository();
+    $controller = new BrandsController($repository);
     return JsonResponse::send([
         'data' => $controller->show($params['id']),
         'message' => 'ok'

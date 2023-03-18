@@ -4,40 +4,31 @@ require(__DIR__ . '/../models/repositories/BrandsRepository.php');
 
 class BrandsController
 {
-    protected $instance;
-    protected $model;
+    private $repository;
 
-    public function __construct()
+    public function __construct(BrandsRepositoryInterface $repository)
     {
-        $this->model = new BrandsRepository();
+        $this->repository = $repository;
     }
+
     public function store($body)
     {
-        return $this->model->store($body);
+        return $this->repository->store($body);
     }
     public function update($body)
     {
-        return $this->model->update($body);
+        return $this->repository->update($body);
     }
     public function index()
     {
-        return $this->model->getAll();
+        return $this->repository->all();
     }
     public function show($id)
     {
-        return $this->model->getOne($id);
+        return $this->repository->find($id);
     }
     public function destroy($id)
     {
-        return $this->model->destroy($id);
-    }
-    protected function app()
-    {
-        if (!$this->instance) {
-            $this->instance = new BrandsController();
-            return $this->instance;
-        }
-
-        return $this->instance;
+        return $this->repository->destroy($id);
     }
 };

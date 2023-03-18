@@ -1,5 +1,6 @@
 <?php
-require(__DIR__ . '/./conn.php');
+
+require(__DIR__ . '/../../config/database.php');
 
 class DB
 {
@@ -7,7 +8,7 @@ class DB
 
     public function __construct()
     {
-        $this->config = DBConfiguration::get();
+        $this->config = DatabaseConfiguration::get();
     }
 
     public function connect(): PDO

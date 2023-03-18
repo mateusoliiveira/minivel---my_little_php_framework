@@ -1,20 +1,21 @@
 <?php
 
-require(__DIR__ . '/../../modules/orm/ORM.php');
+require(__DIR__ . '/../../modules/orm/orm.php');
 
-class AbstractRepository
+abstract class AbstractRepository
 {
     private $orm;
-    public function __construct()
+
+    public function __construct(ORMInterface $orm)
     {
-        $this->orm = new ORM;
+        $this->orm = $orm;
     }
 
-    public function getAll()
+    public function all()
     {
         return $this->orm->all();
     }
-    public function getOne(string $id)
+    public function find(string $id)
     {
         return $this->orm->find($id);
     }
@@ -29,5 +30,10 @@ class AbstractRepository
     public function destroy(string $id)
     {
         return $this->orm->destroy($id);
+    }
+
+    public function getModel()
+    {
+        return $this;
     }
 }

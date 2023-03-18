@@ -8,4 +8,13 @@ require(__DIR__ . '/../interfaces/BrandsRepositoryInterface.php');
  */
 class BrandsRepository extends AbstractRepository implements BrandsRepositoryInterface
 {
-};
+    protected $table = 'brands';
+    protected $fields = [
+        'name',
+        'picture'
+    ];
+    public function __construct()
+    {
+        parent::__construct(new ORM($this->table, $this->fields));
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-class DBConfiguration
+class DatabaseConfiguration
 {
     static public function get()
     {

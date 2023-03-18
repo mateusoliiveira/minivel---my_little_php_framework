@@ -26,9 +26,4 @@ class AbstractRepository
     {
         return $this->orm->update($body);
     }
-
-    public function getRepository()
-    {
-        return $this->orm;
-    }
 }

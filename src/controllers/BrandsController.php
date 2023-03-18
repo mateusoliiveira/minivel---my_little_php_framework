@@ -1,15 +1,15 @@
 <?php
 
-require(__DIR__ . '/../models/repositories/ProductsRepository.php');
+require(__DIR__ . '/../models/repositories/BrandsRepository.php');
 
-class ProductsController
+class BrandsController
 {
     protected $instance;
     protected $model;
 
     public function __construct()
     {
-        $this->model = new ProductsRepository();
+        $this->model = new BrandsRepository();
     }
 
     public function index()
@@ -23,7 +23,7 @@ class ProductsController
     protected function app()
     {
         if (!$this->instance) {
-            $this->instance = new ProductsController();
+            $this->instance = new BrandsController();
             return $this->instance;
         }
 

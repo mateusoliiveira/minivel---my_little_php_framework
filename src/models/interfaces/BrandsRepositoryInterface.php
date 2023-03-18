@@ -1,6 +1,6 @@
 <?php
 
-interface ProductsRepositoryInterface
+interface BrandsRepositoryInterface
 {
     public function getAll();
     public function getOne(string $id);

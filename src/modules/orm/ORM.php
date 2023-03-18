@@ -29,7 +29,7 @@ class ORM
 
     public function store(array $body)
     {
-        $stmt = $this->db->prepare("INSERT INTO brands (name, email) VALUES (:name, :email)");
+        $stmt = $this->db->prepare("INSERT INTO brands (name, picture) VALUES (:name, :picture)");
         $stmt->bindParam(':name', $body['name']);
         $stmt->bindParam(':picture', $body['picture']);
         return $stmt->execute();

@@ -64,10 +64,10 @@ $router->add('/brands/:id', function ($params, $query_params) {
 $router->add('/brands', function ($params, $query_params) {
     header('Accept: application/json');
     $json_str = json_decode(file_get_contents('php://input'));
-    $data = array(
-        'name' => $json_str->name,
-        'picture' => $json_str->picture,
-    );
+    $data = array();
+    foreach ($json_str as $key => $value) {
+        $data[$key] = $value;
+    }
     $repository = new BrandsRepository();
     $controller = new BrandsController($repository);
     return JsonResponse::send([
